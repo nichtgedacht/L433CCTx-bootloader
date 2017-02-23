@@ -12,17 +12,18 @@ FLASH (rx)      : ORIGIN = 0x8004000, LENGTH = 240K
 * edit Src/system_stm32l4xx.c. Change VECT_TAB_OFFSET to
 VECT_TAB_OFFSET 0x4000
 
-The bootloader checks if GPIOA, GPIO_PIN_8 is low while power on to enter DFU mode. Else it jumps to the application at 0x8004000
+The bootloader checks if GPIOB, GPIO_PIN_12 is low while power on.
+Else it jumps to the application at 0x8004000
 
-From the mini-sys application the bootloader can be started also
-At a linux terminal type: 
+From the L433CCx-mini-sys application the bootloader can be started also
+At a linux terminal type:
 echo -n "bootloader" > /dev/ttyACM0
 The bootloader then fetches a message from flash not to start the application but to enter DFU mode
 
 In DFU mode one can do:
 
 Upload application: dfu-util -a 0 -s 0x08004000 -U app.bin
-Upload configuration: dfu-util -a 0-s 0x0801F400:1024 -U flashpage.0x0801F400.bin 
+Upload configuration: dfu-util -a 0-s 0x0803F800:1024 -U flashpage.0x0801F400.bin 
 Download application:  dfu-util -a 0 -s 0x08004000 -D app.bin
-Download configuration: dfu-util -a 0-s 0x0801F400:1024 -D flashpage.0x0801F400.bin
+Download configuration: dfu-util -a 0-s 0x0803F800:1024 -D flashpage.0x0801F400.bin
 Download with subsequent reset: dfu-util -a 0 -s 0x08004000:leave -D app.bin
