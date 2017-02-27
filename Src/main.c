@@ -132,7 +132,6 @@ int main(void)
 
           __set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
           JumpToApplication();
-
       }
   }
 
