@@ -137,9 +137,12 @@ int main(void)
 
   // Dump and erase flash page. Clear flag in page buffer and write back to flash keeping the config vars
   read_flash_vars((uint32_t *) flash_buf, 256, 0);
-  flash_buf[127] = 0xFFFFFFFFFFFFFFFF;
+  //flash_buf[127] = 0xFFFFFFFFFFFFFFFF;
   erase_flash_page();
-  write_flash_vars((uint64_t*) flash_buf, 128, 0);
+  // leave last 64 bit wide location virgin after erase
+  // otherwise the application can not set the flag again
+  // even if all bits are set in this location
+  write_flash_vars((uint64_t*) flash_buf, 127, 0);
 
   MX_USB_DEVICE_Init();
 

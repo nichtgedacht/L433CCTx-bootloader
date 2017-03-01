@@ -70,7 +70,9 @@
 /* USER CODE BEGIN PRIVATE_DEFINES */
 #define FLASH_ERASE_TIME    (uint16_t)50
 #define FLASH_PROGRAM_TIME  (uint16_t)50
-#define FLASH_DESC_STR      "@Internal Flash/0x08000000/01*016Ka,240*001Kg"
+// granularity tells dfu-util transfer size
+//#define FLASH_DESC_STR      "@Internal Flash/0x08000000/01*016Ka,240*001Kg"
+#define FLASH_DESC_STR      "@Internal Flash/0x08000000/08*02Ka,120*02Kg"
 /* USER CODE END PRIVATE_DEFINES */
   
 /**
